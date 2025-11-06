@@ -8,8 +8,4 @@ target_include_directories(gfx PUBLIC
 		${CMAKE_CURRENT_SOURCE_DIR}/include
 )
 
-# WebGPU blackbox
-target_link_libraries(gfx PRIVATE webgpu)
-target_copy_webgpu_binaries(gfx)
-
-target_link_libraries(gfx PUBLIC)
+target_link_libraries(gfx PUBLIC glad)
