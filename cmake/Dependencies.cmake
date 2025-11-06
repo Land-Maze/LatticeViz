@@ -28,7 +28,7 @@ add_library(imgui_lib
 		${imgui_SOURCE_DIR}/imgui_tables.cpp
 		${imgui_SOURCE_DIR}/imgui_widgets.cpp
 		${imgui_SOURCE_DIR}/backends/imgui_impl_glfw.cpp
-		${imgui_SOURCE_DIR}/backends/imgui_impl_wgpu.cpp
+		${imgui_SOURCE_DIR}/backends/imgui_impl_opengl3.cpp
 )
 target_include_directories(imgui_lib PUBLIC
 		${imgui_SOURCE_DIR}
@@ -37,15 +37,12 @@ target_include_directories(imgui_lib PUBLIC
 target_link_libraries(imgui_lib PUBLIC glfw)
 
 # ---------------------------------------------------------------------------
-# WebGPU (static link)
-# Thanks to the Élie Michel
+# GLAD
 # ---------------------------------------------------------------------------
+add_library(glad STATIC
+		third-party/glad/src/glad.c
+)
 
-if (NOT TARGET webgpu)
-		FetchContent_Declare(
-				webgpu-backend-wgpu-static
-				GIT_REPOSITORY https://github.com/eliemichel/WebGPU-distribution
-				GIT_TAG wgpu-static-v0.19.4.1
-		)
-		FetchContent_MakeAvailable(webgpu-backend-wgpu-static)
-endif()
+target_include_directories(glad PUBLIC
+		third-party/glad/include/
+)
