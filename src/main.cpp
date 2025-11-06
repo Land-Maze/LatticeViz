@@ -1,12 +1,14 @@
 #include <core/window.h>
+#include <gfx/renderer.h>
 
 using namespace LatticeViz;
 
 int main(void)
 {
 	Core::Window window;
+	GFX::Renderer renderer;
 
-	window.create(
+	window.Create(
 		{
 			800,
 			600,
@@ -14,10 +16,16 @@ int main(void)
 		}
 	);
 
-	while(!window.shouldClose())
+	renderer.Initialize(window.GetGLFWWindow());
+
+	while(!window.ShouldClose())
 	{
 
+		window.PollEvents();
+		window.SwapBuffer();
 	}
 
+	window.Close();
+	glfwTerminate();
 	return 0;
 }
