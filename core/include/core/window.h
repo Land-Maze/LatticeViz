@@ -38,13 +38,18 @@ namespace LatticeViz::Core
 		 *
 		 * @param window_params Struct that includes title, width, height
 		 */
-		void create(const WindowParams& window_params);
+		void Create(const WindowParams& window_params);
 
 		/**
 		 * Polls events from the windowing system.
 		 * Such as keyboard and mouse input, window resize, etc.
 		 */
-		void pollEvents() const;
+		void PollEvents() const;
+
+		/**
+		 * Swaps the buffer to the next frame.
+		 */
+		void SwapBuffer() const;
 
 		/**
 		 * Checks if the window should close.
@@ -53,19 +58,19 @@ namespace LatticeViz::Core
 		 *
 		 * @return True if the window should close, False otherwise.
 		 */
-		[[nodiscard]] bool shouldClose() const;
+		[[nodiscard]] bool ShouldClose() const;
 
 		/**
 		 * Destroys the window and releases resources related to it.
 		 * After calling this function, the window object should not be used anymore.
 		 */
-		void close();
+		void Close() const;
 
 		/**
 		 *
 		 * @return Returns a pointer to the underlying GLFW window object.
 		 */
-		[[nodiscard]] GLFWwindow* getGLFWWindow() const { return m_window.get(); };
+		[[nodiscard]] GLFWwindow* GetGLFWWindow() const { return m_window.get(); };
 
 	private:
 		Smart_GLFWWindow m_window = nullptr;
