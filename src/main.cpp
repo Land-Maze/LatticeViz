@@ -1,31 +1,28 @@
-#include <core/window.h>
-#include <gfx/renderer.h>
+#include <cstdio>
+#include <printf.h>
 
-using namespace LatticeViz;
-
-int main(void)
+int main(int argc, char** argv, char** envp)
 {
-	Core::Window window;
-	GFX::Renderer renderer;
+    std::printf("argc = %d\n", argc);
 
-	window.Create(
-		{
-			800,
-			600,
-			"LWE Visualisation"
-		}
-	);
+    for (int i = 0; i < argc; i++)
+    {
+        printf("argv[%d] = %s\n", i, argv[i]);
+    }
 
-	renderer.Initialize(window.GetGLFWWindow());
+    while (true)
+    {
+        if (*envp)
+        {
+            printf("envp = %s\n", *envp);
+            envp++;
+        }
+        else
+        {
+            break;
+        }
+    }
 
-	while(!window.ShouldClose())
-	{
 
-		window.PollEvents();
-		window.SwapBuffer();
-	}
-
-	window.Close();
-	glfwTerminate();
-	return 0;
+    return 0;
 }
