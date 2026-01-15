@@ -6,24 +6,15 @@ project(
 		LANGUAGES CXX C
 )
 
-add_executable(LWELibrary src/main.cpp)
-
-set_target_properties(LWELibrary PROPERTIES
-		CXX_STANDARD 23
-		CXX_STANDARD_REQUIRED ON
-		CXX_EXTENSIONS OFF
-		COMPILE_WARNING_AS_ERROR ON
-		CMAKE_CXX_FLAGS_DEBUG "-g -O0"
-		CMAKE_CXX_FLAGS_RELEASE "-O3 -DNDEBUG"
-)
+set(CMAKE_CXX_STANDARD 23)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
+set(CMAKE_CXX_FLAGS_DEBUG "-g -O0")
+set(CMAKE_CXX_FLAGS_RELEASE "-O3 -DNDEBUG")
+set(CMAKE_COMPILE_WARNING_AS_ERROR ON)
 
 include(cmake/Dependencies.cmake)
 
 add_subdirectory(core)
 add_subdirectory(crypto)
-
-if (MSVC)
-	target_compile_options(LWELibrary PRIVATE /W4)
-else()
-	target_compile_options(LWELibrary PRIVATE -Wall -Wextra -pedantic)
-endif()
+add_subdirectory(benchmark)
